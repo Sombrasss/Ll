@@ -1,0 +1,18 @@
+[
+    {
+        "nome": "O Senhor dos Anéis: A Sociedade do Anel",
+        "ano": 2001,
+        "categoria": "Aventura, Fantasia",
+        "imagem": "imagens/sdA.jpg",
+        "trailer": "https://www.youtube.com/watch?v=V75dMMIW2B4",
+        "descricao": "A jornada épica de um hobbit e seus amigos para destruir um anel poderoso."
+    },
+    {
+        "nome": "Matrix",
+        "ano": 1999,
+        "categoria": "Ação, Ficção Científica",
+        "imagem": "imagens/matrix.jpg",
+        "trailer": "https://www.youtube.com/watch?v=vKQi3bBA1y8",
+        "descricao": "Neo, um hacker, descobre que a realidade não é o que parece ser."
+    }
+]

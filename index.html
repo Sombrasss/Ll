@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Filmes</title>
+    <style>
+        .filme {
+            margin-bottom: 20px;
+        }
+        .filme img {
+            width: 200px;
+        }
+        .filme h3 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Filmes</h1>
+    <div id="lista-filmes"></div>
+
+    <script>
+        // Função para carregar os filmes
+        function carregarFilmes() {
+            fetch('filmes.json')  // Carrega o arquivo JSON
+                .then(response => response.json())
+                .then(filmes => {
+                    let lista = document.getElementById('lista-filmes');
+                    filmes.forEach(filme => {
+                        let divFilme = document.createElement('div');
+                        divFilme.classList.add('filme');
+                        
+                        divFilme.innerHTML = `
+                            <h3>${filme.nome} (${filme.ano})</h3>
+                            <p><strong>Categoria:</strong> ${filme.categoria}</p>
+                            <img src="${filme.imagem}" alt="${filme.nome}">
+                            <p>${filme.descricao}</p>
+                            <a href="${filme.trailer}" target="_blank">Assistir Trailer</a>
+                        `;
+                        
+                        lista.appendChild(divFilme);
+                    });
+                })
+                .catch(error => console.log('Erro ao carregar filmes: ', error));
+        }
+
+        // Carregar filmes quando a página carregar
+        window.onload = carregarFilmes;
+    </script>
+</body>
+</html>
