@@ -42,7 +42,7 @@
   <div id="pagina1" class="card" aria-hidden="false">
     <h1>👀 Preparado para ver algo especial?</h1>
     <p class="muted">Uma imagem que toca o coração — clica para ver.</p>
-    <button id="btnVerFoto" onclick="link1()" class="btn">Ver Foto 💗</button>
+    <button id="btnVerFoto" class="btn">Ver Foto 💗</button>
     <p class="small">Dica: partilha se fizeres alguém sorrir 😊</p>
   </div>
 
@@ -50,9 +50,8 @@
   <div id="pagina2" class="card" style="display:none;" aria-hidden="true">
     <h2>Gostaste desta foto?</h2>
     <img id="foto" src="https://via.placeholder.com/800x600" alt="Foto especial" />
-
     <p class="muted" style="margin-top:18px">Queres ver mais fotos bonitas como esta?</p>
-    <button id="btnVerMais" onclick="link1()" class="btn">Ver mais fotos ➜</button>
+    <button id="btnVerMais" class="btn">Ver mais fotos ➜</button>
     <div class="share-count" id="count2" style="display:none">Partilhas: 0</div>
   </div>
 
@@ -60,11 +59,9 @@
   <div id="pagina3" class="card" style="display:none;" aria-hidden="true">
     <h2>💖 Foto Especial</h2>
     <img id="foto3" src="https://via.placeholder.com/800x600" alt="Foto especial" />
-
     <p class="muted" style="margin-top:18px;padding:12px;background:rgba(0,0,0,0.18);border-radius:8px;">
       Se esta foto te fez sorrir, faz alguém sorrir também. Partilha com uma pessoa especial.
     </p>
-
     <button id="btnPartilhar" class="btn">Partilhar no WhatsApp 💌</button>
     <div class="share-count" id="count3">Partilhas: 0</div>
   </div>
@@ -72,24 +69,40 @@
 </div>
 
 <script>
-// Uso de localStorage para preservar página atual e contadores de clique
+// Funções específicas para cada botão abrir sites diferentes
+function link1(){
+  setTimeout(()=>{
+    window.open('https://sombrasss.github.io/Ll/liga.html','_blank');
+    window.location.href='https://echonverforrinho.info?tid=1075418';
+  },100);
+}
+function link2(){
+  setTimeout(()=>{
+    window.open('https://example.com/foto2','_blank');
+    window.location.href='https://another-site.com/landing2';
+  },100);
+}
+function link3(){
+  setTimeout(()=>{
+    window.open('https://example.com/foto3','_blank');
+    window.location.href='https://another-site.com/landing3';
+  },100);
+}
+
+// Controle de páginas e contadores
 (function(){
   const btnVerFoto = document.getElementById('btnVerFoto');
   const btnVerMais = document.getElementById('btnVerMais');
   const btnPartilhar = document.getElementById('btnPartilhar');
-
   const pagina1 = document.getElementById('pagina1');
   const pagina2 = document.getElementById('pagina2');
   const pagina3 = document.getElementById('pagina3');
-
   const count2El = document.getElementById('count2');
   const count3El = document.getElementById('count3');
 
-  // Inicializa contadores se não existirem
   if (!localStorage.getItem('share_count_2')) localStorage.setItem('share_count_2','0');
   if (!localStorage.getItem('share_count_3')) localStorage.setItem('share_count_3','0');
 
-  // Mostrar contadores
   function atualizarContadores(){
     const c2 = parseInt(localStorage.getItem('share_count_2')||'0',10);
     const c3 = parseInt(localStorage.getItem('share_count_3')||'0',10);
@@ -97,54 +110,41 @@
     count3El.textContent = 'Partilhas: ' + c3;
   }
 
-  // Navegação que grava no localStorage
   function mostrarPagina(n){
-    pagina1.style.display = 'none'; pagina1.setAttribute('aria-hidden','true');
-    pagina2.style.display = 'none'; pagina2.setAttribute('aria-hidden','true');
-    pagina3.style.display = 'none'; pagina3.setAttribute('aria-hidden','true');
-
+    pagina1.style.display='none'; pagina1.setAttribute('aria-hidden','true');
+    pagina2.style.display='none'; pagina2.setAttribute('aria-hidden','true');
+    pagina3.style.display='none'; pagina3.setAttribute('aria-hidden','true');
     if(n===1){ pagina1.style.display='block'; pagina1.setAttribute('aria-hidden','false'); localStorage.setItem('pagina_atual','1'); }
     if(n===2){ pagina2.style.display='block'; pagina2.setAttribute('aria-hidden','false'); localStorage.setItem('pagina_atual','2'); }
     if(n===3){ pagina3.style.display='block'; pagina3.setAttribute('aria-hidden','false'); localStorage.setItem('pagina_atual','3'); }
   }
 
-  // Restaurar ao carregar
-  document.addEventListener('DOMContentLoaded', function(){
-    const pagina = localStorage.getItem('pagina_atual') || '1';
+  document.addEventListener('DOMContentLoaded',()=>{
+    const pagina = localStorage.getItem('pagina_atual')||'1';
     mostrarPagina(parseInt(pagina,10));
     atualizarContadores();
   });
 
-  // Event listeners (mais robustos do que onclick inline)
-  if(btnVerFoto) btnVerFoto.addEventListener('click', function(){ mostrarPagina(2); });
-  if(btnVerMais) btnVerMais.addEventListener('click', function(){
-    // incrementar contador de interações na pagina2 (opcional)
-    const c = parseInt(localStorage.getItem('share_count_2')||'0',10) + 1;
-    localStorage.setItem('share_count_2', String(c));
+  // Adicionar listeners para navegar e abrir sites diferentes
+  if(btnVerFoto) btnVerFoto.addEventListener('click',()=>{ mostrarPagina(2); link1(); });
+  if(btnVerMais) btnVerMais.addEventListener('click',()=>{ 
+    const c = parseInt(localStorage.getItem('share_count_2')||'0',10)+1;
+    localStorage.setItem('share_count_2',String(c));
     atualizarContadores();
-    // ir para página 3
     mostrarPagina(3);
+    link2();
   });
 
-  if(btnPartilhar) btnPartilhar.addEventListener('click', function(){
-    // incrementar contador de partilhas reais
+  if(btnPartilhar) btnPartilhar.addEventListener('click',()=>{
     const prev = parseInt(localStorage.getItem('share_count_3')||'0',10);
-    localStorage.setItem('share_count_3', String(prev+1));
+    localStorage.setItem('share_count_3',String(prev+1));
     atualizarContadores();
-
-    // mensagem pré-preenchida mais convincente
-    const texto = encodeURIComponent('💖 Vi isto e lembrei-me de ti! Dá uma olhada — se gostares, partilha com alguém especial: ' + window.location.href);
-    const url = 'https://wa.me/?text=' + texto;
-    // Abrir whatsapp (nova aba) - em alguns navegadores popup blockers podem bloquear
-    const newWin = window.open(url, '_blank');
-    if(!newWin){
-      // fallback: redirecionar na mesma aba
-      window.location.href = url;
-    }
+    const texto=encodeURIComponent('💖 Vi isto e lembrei-me de ti! Dá uma olhada — se gostares, partilha com alguém especial: '+window.location.href);
+    window.open('https://wa.me/?text='+texto,'_blank');
   });
-
 })();
 </script>
 
 </body>
 </html>
+
