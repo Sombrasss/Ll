@@ -3,74 +3,76 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gostou da Foto?</title>
+<title>Ver Foto</title>
 <style>
   body {
-    background: #111;
+    background: #0e0e0e;
     color: #fff;
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
   }
-  #foto {
-    width: 90%;
-    max-width: 350px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
   .btn {
-    background: #ff0066;
-    padding: 12px 20px;
+    background: #ff0077;
+    padding: 15px 25px;
     border: none;
     color: #fff;
-    font-size: 18px;
-    border-radius: 8px;
+    font-size: 20px;
+    border-radius: 12px;
     cursor: pointer;
-    margin: 10px;
+    margin-top: 40px;
   }
   .btn:hover { opacity: 0.8; }
-  #carta {
-    display: none;
-    margin-top: 30px;
-    background: #222;
-    padding: 20px;
-    border-radius: 10px;
+  .container {
+    margin-top: 120px;
   }
 </style>
 </head>
 <body>
 
-<h2>Gostaste desta foto?</h2>
-<img id="foto" src="https://via.placeholder.com/350" alt="Foto" />
+<!-- ==================== PÁGINA 1 ==================== -->
+<div id="pagina1" class="container">
+  <h1>👀 Preparado para ver algo especial?</h1>
+  <p>Clica aqui para ver uma foto que está a conquistar corações.</p>
+  <button class="btn" onclick="irParaPagina2()">Ver Foto 💗</button>
+</div>
 
-<button class="btn" onclick="mostrarCarta()">Sim</button>
-<button class="btn" onclick="mostrarCarta()">Não</button>
+<!-- ==================== PÁGINA 2 ==================== -->
+<div id="pagina2" style="display:none;">
+  <h2>Gostaste desta foto?</h2>
+  <img id="foto" src="https://via.placeholder.com/400" style="width:90%;max-width:380px;border-radius:12px;box-shadow:0 0 15px #ff0077;margin-top:20px;" />
 
-<div id="carta">
-  <h2>Mensagem Especial ❤</h2>
-  <p>
-    Mesmo que não tenhas gostado muito, quero que saibas que cada detalhe desta
-    foto foi escolhido para te fazer sorrir. Às vezes o amor começa em pequenas
-    coisas — como uma imagem simples que toca o coração.
+  <p style="margin-top:25px;font-size:18px;">Queres ver mais fotos bonitas como esta?</p>
+  <button class="btn" onclick="irParaPagina3()">Ver mais fotos ➜</button>
+</div>
+
+<!-- ==================== PÁGINA 3 ==================== -->
+<div id="pagina3" style="display:none;">
+  <h2>💖 Foto Especial</h2>
+  <img src="https://via.placeholder.com/400" style="width:90%;max-width:380px;border-radius:12px;box-shadow:0 0 15px #ff0077;margin-top:20px;" />
+
+  <p style="margin-top:25px;font-size:18px;padding:15px;background:#1a1a1a;border-radius:10px;">
+    Se esta foto te fez sorrir, faz alguém sorrir também. Partilha com uma pessoa especial.
   </p>
-  <p>
-    Se esta mensagem te fez sentir algo especial, partilha com 5 pessoas no
-    WhatsApp e espalha um pouco de carinho hoje. 💖
-  </p>
 
-  <button class="btn" onclick="partilharWhatsApp()">Partilhar no WhatsApp</button>
+  <button class="btn" onclick="partilharWhatsApp()">Partilhar no WhatsApp 💌</button>
 </div>
 
 <script>
-function mostrarCarta() {
-  document.getElementById("carta").style.display = "block";
+function irParaPagina2() {
+  document.getElementById("pagina1").style.display = "none";
+  document.getElementById("pagina2").style.display = "block";
+}
+
+function irParaPagina3() {
+  document.getElementById("pagina2").style.display = "none";
+  document.getElementById("pagina3").style.display = "block";
 }
 
 function partilharWhatsApp() {
   const mensagem = encodeURIComponent(
-    "💖 Esta mensagem especial é para ti! Dá uma olhada neste site, é impossível não gostar! 👉 " + window.location.href
+    "💖 Encontrei esta foto e lembrei-me de ti! Vê aqui 👉 " + window.location.href + "\nPartilha também com alguém especial."
   );
-
   const url = "https://wa.me/?text=" + mensagem;
   window.open(url, "_blank");
 }
