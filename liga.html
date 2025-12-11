@@ -59,19 +59,33 @@
 </div>
 
 <script>
-function irParaPagina2() {
+// --- Controle de página com localStorage ---
+window.onload = function () {
+  const pagina = localStorage.getItem("pagina_atual");
+
+  if (pagina === "2") {
+    irParaPagina2(true);
+  } else if (pagina === "3") {
+    irParaPagina3(true);
+  }
+};
+
+function irParaPagina2(restaurar = false) {
   document.getElementById("pagina1").style.display = "none";
   document.getElementById("pagina2").style.display = "block";
+  if (!restaurar) localStorage.setItem("pagina_atual", "2");
 }
 
-function irParaPagina3() {
+function irParaPagina3(restaurar = false) {
   document.getElementById("pagina2").style.display = "none";
   document.getElementById("pagina3").style.display = "block";
+  if (!restaurar) localStorage.setItem("pagina_atual", "3");
 }
 
 function partilharWhatsApp() {
   const mensagem = encodeURIComponent(
-    "💖 Encontrei esta foto e lembrei-me de ti! Vê aqui 👉 " + window.location.href + "\nPartilha também com alguém especial."
+    "💖 Encontrei esta foto e lembrei-me de ti! Vê aqui 👉 " + window.location.href + "
+Partilha também com alguém especial."
   );
   const url = "https://wa.me/?text=" + mensagem;
   window.open(url, "_blank");
