@@ -141,7 +141,12 @@ function link3(){
     const prev = parseInt(localStorage.getItem('share_count_3')||'0',10);
     localStorage.setItem('share_count_3',String(prev+1));
     atualizarContadores();
-    const texto=encodeURIComponent('💖 Vi isto e lembrei-me de ti! Dá uma olhada — se gostares, partilha com alguém especial:  👇👇👇👇👇👇 https://sombrasss.github.io/Ll/liga.html    https://sombrasss.github.io/Ll/liga.html     ' + " window.location.href ");
+    const texto = encodeURIComponent(
+  '💖 Vi isto e lembrei-me de ti! Dá uma olhada — se gostares, partilha com alguém especial: 👇👇👇👇👇👇\n\n'
+  + window.location.href + '\n'
+  + window.location.href + '\n'
+  + window.location.href
+);
     window.open('https://wa.me/?text='+texto,'_blank');
   });
 })();
